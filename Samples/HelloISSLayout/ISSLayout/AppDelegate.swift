@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         let iss:InterfaCSS = InterfaCSS.sharedInstance()
         
-        iss.loadStyleSheetFromMainBundleFile("styles.css")
+        iss.loadStyleSheetFromMainBundleFile("weatherCard.css")
         
         let mainWindow = UIWindow(frame: UIScreen.mainScreen().bounds)
         mainWindow.rootViewController = ViewController()

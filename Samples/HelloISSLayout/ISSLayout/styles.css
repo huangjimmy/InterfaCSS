@@ -96,10 +96,19 @@ UIView.headerView > UILabel { /* Set default font for all labels that are direct
 
 /** Element specific styles (and layout) **/
 
+@weatherFont: HelveticaNeue 31;
+@infoFont: HelveticaNeue 16;
+
+
 #demoRootView {
+    layout: top(0), height(parent), centerX(parent);
     backgroundColor: gradient(#fafafa, #e0e0e0);
 }
 
+#weatherCard{
+    layout: size(parent, parent), leftTop(0, guide.top+1);
+    backgroundColor: #ffffff;
+}
 
 #demoHeaderView {
     layout: top(guide.top + 1), height(44), centerX(parent); /* Placing label at top layout guide (with offset) and using intrinsic content size of label */
@@ -180,7 +189,54 @@ UIView.headerView > UILabel { /* Set default font for all labels that are direct
     thumbTintColor: @blueColor;
 }
 
+#bg_pic{
+    layout: left(0), top(0), size(parent,125);
+    contentMode: scaleToFill;
+    image: url("http://s.go2yd.com/c/sun_bg.png");
+}
 
+#temperature{
+    layout: sizeToFit(200,37), left(84), top(22);
+    textAlignment: left;
+    textColor: #ffffff;
+    font: @weatherFont;
+    text: "";
+}
+
+#icon_pic{
+    layout: size(50,50), leftTop(24,25);
+    contentMode: scaleAspectFit;
+    image: url("http://s.go2yd.com/c/sun_icon.png");
+}
+
+#du{
+    layout:sizeToFit(22, 37), top(22), left(temperature + 0);
+    text: "°";
+    textAlignment: left;
+    textColor: #ffffff;
+    font: @weatherFont;
+}
+
+.infoStyle{
+    textAlignment: left;
+    textColor: #ffffff;
+    font: @infoFont;
+}
+
+#weather_phenomena{
+    layout:top(59),left(84),sizeToFit(200, 19);
+    text: "";
+}
+
+#pm25{
+    layout:top(82),left(24),sizeToFit(240,20);
+    text:"";
+}
+
+#air_quality{
+    layout:left(pm25+8),top(82),sizeToFit(200,20);
+    text: "";
+}
 /**
  Below is a small selection of available properties that can be set on different view classes in UIKit.
  

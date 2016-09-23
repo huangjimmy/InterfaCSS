@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ 
+ Demo InterfaCSS view definition file.
+ 
+ -->
+<view id="demoRootView">
+    <view id="weatherCard">
+        <imageview id="bg_pic" property="backgroundImageView"/>
+        <imageview id="icon_pic" property="iconImageView"/>
+        <label id="temperature" property="temperatureLabel"/>
+        <label id="du"/>
+        <label id="weather_phenomena" property="phenomenaLabel" class="infoStyle"/>
+        <label id="pm25" property="pm25Label" class="infoStyle"/>
+        <label id="air_quality" property="airqualityLabel" class="infoStyle"/>
+    </view>
+    
+    <button id="demoButton2" property="goodAirBtn"/>
+    <button id="demoButton3" property="badAirBtn"/>
+</view>

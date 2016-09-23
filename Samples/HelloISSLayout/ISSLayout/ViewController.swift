@@ -16,7 +16,19 @@ class ViewController: UIViewController {
     var label: UILabel?
     var rootView:ISSLayoutContextView?
     
+    var backgroundImageView:UIImageView?;
+    var iconImageView:UIImageView?;
+    var temperatureLabel:UILabel?;
+    var phenomenaLabel:UILabel?;
+    var pm25Label:UILabel?;
+    var airqualityLabel:UILabel?;
+    
+    var goodAirBtn: UIButton?
+    var badAirBtn: UIButton?
+    
     var buttonCenterLayoutValueDefault : CGFloat?
+    
+    var weatherData : [String:AnyObject]?
     
     
     override func loadView() {
@@ -39,8 +51,17 @@ class ViewController: UIViewController {
             ];
         })*/
         
+        let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("weather", ofType: "json")!);
+        do{
+        let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: UInt(0)));
+            self.weatherData = dict as? [String : AnyObject];
+        }
+        catch(_){}
+        
         // *** OPTION 2 - Load both view hierachy and layout from a view definition file ('layout.xml') ***
-        self.view = ISSViewBuilder.loadViewHierarchyFromMainBundleFile("layout.xml", fileOwner: self)
+        self.view = ISSViewBuilder.loadViewHierarchyFromMainBundleFile("weather.xml", fileOwner: self);
+            
+            self.rootView = self.view as! ISSRootView;
 
 /*
         if let b = button {
@@ -67,9 +88,61 @@ class ViewController: UIViewController {
                         layout.valueForLayoutAttribute(.CenterY).constant = self.buttonCenterLayoutValueDefault!
                     }
                 }
+                
+                if let dict = self.weatherData {
+                    if(view.isKindOfClass(UIImageView)){
+                        let iv:UIImageView = view as! UIImageView;
+                        //iv.image = nil;
+                    }
+                    if(view.isKindOfClass(UILabel)){
+                        let label:UILabel = view as! UILabel;
+                        let info = dict[view.elementIdISS!];
+                        
+                        if let text = info as? String {
+                            label.text = text;
+                        }
+                        if let text = info as? Int {
+                            label.text = String(format: "%lu", text);
+                        }
+                    }
+                }
             }
             // Example of post processing block, using class function
             layoutContextView.layoutPostProcessingBlock = ViewController.layoutPostProcessingBlock
+        }
+        
+        
+        if let b = self.goodAirBtn {
+            b.addTarget(self, action: #selector(ViewController.goodAir(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        }
+        
+        if let b = self.badAirBtn {
+            b.addTarget(self, action: #selector(ViewController.badAir(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        }
+    }
+    
+    func goodAir(sender:UIButton){
+        let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("weather2", ofType: "json")!);
+        do{
+            let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: UInt(0)));
+            self.weatherData = dict as? [String : AnyObject];
+        }
+        catch(_){}
+        
+        if let _ = self.weatherData {
+            self.view.setNeedsLayout()
+        }
+    }
+    
+    func badAir(sender:UIButton){
+        let data = NSData(contentsOfFile: NSBundle.mainBundle().pathForResource("weather", ofType: "json")!);
+        do{
+            let dict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions(rawValue: UInt(0)));
+            self.weatherData = dict as? [String : AnyObject];
+        }
+        catch(_){}
+        if let _ = self.weatherData {
+            self.view.setNeedsLayout()
         }
     }
     

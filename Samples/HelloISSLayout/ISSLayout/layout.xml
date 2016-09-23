@@ -14,7 +14,7 @@
     <label id="demoLabel2" class="labelStyle2"/>
     <label id="demoLabel3" class="labelStyle3"/>
     
-    <button id="demoButton1" class="buttonStyle1 roundedCorners"/> <!-- Multiple style classes, separated by whitespace, can be set -->
+    <button id="demoButton1" property="button" class="buttonStyle1 roundedCorners"/> <!-- Multiple style classes, separated by whitespace, can be set -->
     <button id="demoButton2" class="buttonStyle2 roundedCorners"/>
     <button id="demoButton3" class="buttonStyle3 roundedCorners"/>
     

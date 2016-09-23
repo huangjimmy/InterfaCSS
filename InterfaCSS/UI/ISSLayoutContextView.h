@@ -15,7 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-typedef void (^ISSLayoutProcessingBlock)(UIView* view, ISSLayout* _Nullable layout);
+typedef void (^ISSLayoutProcessingBlock)(UIView* _Nonnull  view,  ISSLayout* _Nonnull layout);
 
 
 /**
